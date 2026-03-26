@@ -3,170 +3,375 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmd — Never lose a booking to no-shows again</title>
+  <title>Confirmd — Never chase a confirmation again</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      background: #fafaf9;
+      color: #1c1917;
+      line-height: 1.6;
     }
-    .container {
-      max-width: 560px;
-      width: 100%;
+    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+    a { color: #059669; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .logo { font-weight: 700; font-size: 18px; color: #0f172a; letter-spacing: -0.02em; }
+    .logo span { color: #059669; }
+    .nav-cta {
+      background: #059669;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 60px;
       text-align: center;
     }
-    .badge {
-      display: inline-block;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      color: #888;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 20px;
-      margin-bottom: 32px;
-    }
-    h1 {
-      font-size: clamp(32px, 5vw, 48px);
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
       font-weight: 700;
+      color: #0f172a;
       line-height: 1.1;
-      margin-bottom: 20px;
       letter-spacing: -0.03em;
+      margin-bottom: 20px;
     }
-    h1 span {
-      color: #FF6B35;
+    .hero h1 em {
+      font-style: normal;
+      color: #059669;
     }
-    .sub {
+    .hero .sub {
       font-size: 18px;
-      color: #888;
-      line-height: 1.6;
-      margin-bottom: 40px;
+      color: #57534e;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
     }
-    .form {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
+    .form-box {
+      background: #fff;
+      border: 1px solid #e7e5e4;
+      border-radius: 16px;
+      padding: 28px 32px;
+      max-width: 460px;
+      margin: 0 auto;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
     }
+    .form-box p {
+      font-size: 14px;
+      color: #78716c;
+      margin-bottom: 16px;
+    }
+    .form-row { display: flex; gap: 8px; flex-wrap: wrap; }
     input[type="email"] {
       flex: 1;
-      min-width: 200px;
-      height: 52px;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 0 16px;
+      min-width: 180px;
+      height: 48px;
+      background: #fafaf9;
+      border: 1px solid #d6d3d1;
+      border-radius: 8px;
+      padding: 0 14px;
       font-size: 15px;
-      color: #fff;
+      color: #1c1917;
       outline: none;
+      font-family: inherit;
     }
-    input[type="email"]:focus {
-      border-color: #FF6B35;
-    }
+    input[type="email"]:focus { border-color: #059669; }
     button {
-      height: 52px;
-      background: #FF6B35;
+      height: 48px;
+      background: #059669;
       color: #fff;
       border: none;
-      border-radius: 10px;
-      padding: 0 28px;
+      border-radius: 8px;
+      padding: 0 24px;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
+      white-space: nowrap;
     }
-    button:hover {
-      background: #ff8c5a;
-    }
-    .proof {
-      margin-top: 32px;
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .proof-item {
-      text-align: center;
-    }
-    .proof-num {
-      font-size: 28px;
-      font-weight: 700;
-      color: #FF6B35;
-    }
-    .proof-label {
+    button:hover { background: #047857; }
+    .form-note {
       font-size: 12px;
-      color: #666;
-      margin-top: 4px;
+      color: #a8a29e;
+      margin-top: 12px;
     }
     .success {
       display: none;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 24px;
-      margin-top: 24px;
-      color: #4ade80;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 20px;
+      color: #166534;
       font-size: 15px;
+      text-align: center;
+    }
+
+    /* SECTION */
+    .section { padding: 56px 0; border-top: 1px solid #e7e5e4; }
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .section p { font-size: 16px; color: #44403c; }
+
+    /* PROBLEM */
+    .problem { background: #fff; }
+    .problem-list { list-style: none; margin-top: 20px; }
+    .problem-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #f5f5f4;
+      font-size: 16px;
+      color: #57534e;
+      display: flex;
+      gap: 12px;
+    }
+    .problem-list li:last-child { border-bottom: none; }
+    .x { color: #dc2626; font-weight: 700; }
+
+    /* WHO */
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .who-card {
+      background: #fff;
+      border: 1px solid #e7e5e4;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .who-card h3 { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 6px; }
+    .who-card p { font-size: 13px; color: #78716c; }
+
+    /* ROI */
+    .roi { background: #f0fdf4; border-color: #bbf7d0; }
+    .roi-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 20px;
+      border: 1px solid #d1fae5;
+    }
+    .roi-numbers {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .roi-num { font-size: 32px; font-weight: 700; color: #059669; }
+    .roi-label { font-size: 13px; color: #78716c; margin-top: 2px; }
+    .roi-text { font-size: 15px; color: #44403c; border-top: 1px solid #f5f5f4; padding-top: 16px; margin-top: 8px; }
+
+    /* PRICING */
+    .pricing { text-align: center; }
+    .pricing-card {
+      background: #fff;
+      border: 2px solid #059669;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 360px;
+      margin: 24px auto 0;
+      text-align: left;
     }
     .price {
-      margin-top: 16px;
-      font-size: 14px;
-      color: #555;
+      font-size: 48px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.03em;
     }
-    .price strong {
-      color: #888;
+    .price span { font-size: 16px; font-weight: 400; color: #78716c; }
+    .price-desc { font-size: 14px; color: #78716c; margin: 8px 0 20px; }
+    .price-features { list-style: none; }
+    .price-features li {
+      font-size: 14px;
+      color: #44403c;
+      padding: 6px 0;
+      display: flex;
+      gap: 8px;
+    }
+    .check { color: #059669; font-weight: 700; }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #a8a29e;
+      border-top: 1px solid #e7e5e4;
     }
   </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">confirm<span>d</span></div>
+  <a href="#waitlist" class="nav-cta">Join beta</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
   <div class="container">
-    <div class="badge">Coming soon</div>
-    <h1>Never lose a booking to a <span>no-show</span> again</h1>
+    <h1>Never chase a <em>confirmation</em> again</h1>
     <p class="sub">
-      Confirmd sends your clients a confirmation sequence — automatically.
-      3 smart texts. Zero no-shows. More revenue in your pocket.
+      Confirmd sends your clients a smart confirmation sequence — automatically.
+      3 texts per booking. Zero no-shows. More revenue in your pocket.
     </p>
 
-    <form class="form" id="waitlist-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfM-TEST/formResponse" method="POST" target="_blank">
-      <input type="email" name="entry.123456789" placeholder="your@clinic.com" required>
-      <button type="submit">Join the waitlist</button>
-    </form>
-    <div class="success" id="success-msg">
-      ✅ You're on the list. We'll be in touch.
-    </div>
-
-    <div class="proof">
-      <div class="proof-item">
-        <div class="proof-num">257</div>
-        <div class="proof-label">Locations needed for launch</div>
-      </div>
-      <div class="proof-item">
-        <div class="proof-num">$39</div>
-        <div class="proof-label">per location / month</div>
-      </div>
-      <div class="proof-item">
-        <div class="proof-num">3</div>
-        <div class="proof-label">texts per booking</div>
+    <div class="form-box" id="waitlist">
+      <p>Get early access. First 3 months free for founding members.</p>
+      <form id="beta-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfM-TEST/formResponse" method="POST" target="_blank">
+        <div class="form-row">
+          <input type="email" name="entry.123456789" placeholder="your@clinic.com" required>
+          <button type="submit">Join waitlist</button>
+        </div>
+        <p class="form-note">No credit card. We'll contact you when beta opens.</p>
+      </form>
+      <div class="success" id="success-msg">
+        ✅ You're on the list. We'll be in touch.
       </div>
     </div>
-
-    <p class="price">
-      <strong>Beta pricing:</strong> First 3 months free for founding members.
-    </p>
   </div>
+</section>
 
-  <script>
-    document.getElementById('waitlist-form').addEventListener('submit', function() {
+<!-- PROBLEM -->
+<section class="section problem">
+  <div class="container">
+    <h2>The problem isn't your service. It's your inbox.</h2>
+    <p>You're seeing 30+ clients a week. You're also spending hours chasing confirmations — texting clients the day before, hoping they remember. And they don't. So you chase again. And again.</p>
+    <ul class="problem-list">
+      <li><span class="x">✕</span> "Just wanted to confirm we're still good for tomorrow?"</li>
+      <li><span class="x">✕</span> Clients who forget. Appointments that vanish.</li>
+      <li><span class="x">✕</span> Cancellations you could have filled — if you'd known sooner.</li>
+      <li><span class="x">✕</span> Revenue that evaporates because no one confirmed.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <h2>Built for service businesses that can't afford no-shows</h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>Salons & Spas</h3>
+        <p>Hair, beauty, massage. High-repeat, high-no-show. Confirmd fills the gaps.</p>
+      </div>
+      <div class="who-card">
+        <h3>Dental & Medical</h3>
+        <p>Every empty chair costs money. Confirmd protects your schedule.</p>
+      </div>
+      <div class="who-card">
+        <h3>Professional Services</h3>
+        <p>Coaches, consultants, accountants. Where time is the product.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="section roi">
+  <div class="container">
+    <h2>The math is simple</h2>
+    <div class="roi-box">
+      <div class="roi-numbers">
+        <div>
+          <div class="roi-num">$39</div>
+          <div class="roi-label">per location / month</div>
+        </div>
+        <div>
+          <div class="roi-num">5</div>
+          <div class="roi-label">average no-shows/week</div>
+        </div>
+        <div>
+          <div class="roi-num">$75</div>
+          <div class="roi-label">avg. appointment value</div>
+        </div>
+      </div>
+      <p class="roi-text">
+        <strong>5 no-shows × $75 = $375/week lost.</strong> That's $1,500/month.
+        Confirmd costs $39/month. It pays for itself on the first Thursday you don't chase a confirmation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="container">
+    <h2>How it works</h2>
+    <p>Three steps. Zero ongoing work for you.</p>
+    <ol style="list-style:none; margin-top:20px; counter-reset:step;">
+      <li style="padding:12px 0; border-bottom:1px solid #f5f5f4; display:flex; gap:16px;">
+        <span style="background:#059669; color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0;">1</span>
+        <div><strong style="color:#0f172a;">Connect your calendar.</strong> Calendly, Google Calendar, or manual entry. Takes 2 minutes.</div>
+      </li>
+      <li style="padding:12px 0; border-bottom:1px solid #f5f5f4; display:flex; gap:16px;">
+        <span style="background:#059669; color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0;">2</span>
+        <div><strong style="color:#0f172a;">Confirmd sends the sequence.</strong> 72 hours before: initial check-in. Day-of 9am: reminder. 2 hours before: final nudge.</div>
+      </li>
+      <li style="padding:12px 0; display:flex; gap:16px;">
+        <span style="background:#059669; color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0;">3</span>
+        <div><strong style="color:#0f172a;">Clients reply. You see results.</strong> YES/CANCEL/RESCHEDULE routes automatically. Cancelled? Your waitlist gets triggered.</div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing" style="background:#fff;">
+  <div class="container">
+    <h2>Simple pricing</h2>
+    <p style="color:#78716c; margin-top:8px;">No tiers. No surprise fees. One price.</p>
+    <div class="pricing-card">
+      <div class="price">$39<span>/location/mo</span></div>
+      <p class="price-desc">All features included. No per-user pricing.</p>
+      <ul class="price-features">
+        <li><span class="check">✓</span> 3-touch SMS confirmation sequence</li>
+        <li><span class="check">✓</span> Two-way reply parsing (YES/CANCEL/RESCHEDULE)</li>
+        <li><span class="check">✓</span> Waitlist auto-fill on cancellation</li>
+        <li><span class="check">✓</span> Confirmation rate dashboard</li>
+        <li><span class="check">✓</span> Multi-location support</li>
+      </ul>
+      <div style="margin-top:20px; padding-top:20px; border-top:1px solid #f5f5f4;">
+        <p style="font-size:13px; color:#059669; font-weight:600;">🎁 Beta offer: First 3 months free for founding members</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Confirmd — Never chase a confirmation again.<br>
+  <a href="#waitlist">Join the beta waitlist</a></p>
+</footer>
+
+<script>
+  document.getElementById('beta-form').addEventListener('submit', function() {
+    setTimeout(function() {
       document.getElementById('success-msg').style.display = 'block';
-    });
-  </script>
+      document.getElementById('beta-form').style.display = 'none';
+    }, 1000);
+  });
+</script>
+
 </body>
 </html>
